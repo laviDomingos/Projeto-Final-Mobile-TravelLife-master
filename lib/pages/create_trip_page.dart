@@ -15,11 +15,15 @@ class _CreateTripPageState extends State<CreateTripPage> {
     if (_imageController.text.isNotEmpty &&
         _descController.text.isNotEmpty &&
         _locationController.text.isNotEmpty) {
+
+      // ⚠️ Criando Trip com ID "temporário", Home vai corrigir
       final newTrip = Trip(
+        id: -1, // Placeholder, será substituído na HomePage
         imagePath: _imageController.text,
         description: _descController.text,
         location: _locationController.text,
       );
+
       Navigator.pop(context, newTrip);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -59,4 +63,3 @@ class _CreateTripPageState extends State<CreateTripPage> {
     );
   }
 }
-

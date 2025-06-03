@@ -12,14 +12,12 @@ class _LoginPageState extends State<LoginPage> {
   final _senhaController = TextEditingController();
 
   void _login() {
-    // Aqui, faz sua validação simples e navega pra home
     if (_usuarioController.text == 'teste' && _senhaController.text == '123') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
-      // feedback de erro
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Usuário ou senha inválidos')),
       );
@@ -29,22 +27,46 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text('Travelife')),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
+            TextFormField(
               controller: _usuarioController,
-              decoration: InputDecoration(labelText: 'Usuário'),
+              decoration: InputDecoration(
+                labelText: 'Usuário',
+                prefixIcon: Icon(Icons.person_outline),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
-            TextField(
+            SizedBox(height: 16),
+            TextFormField(
               controller: _senhaController,
-              decoration: InputDecoration(labelText: 'Senha'),
               obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Senha',
+                prefixIcon: Icon(Icons.lock_outline),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(onPressed: _login, child: Text('Entrar')),
+            SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: _login,
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text('Entrar', style: TextStyle(fontSize: 18)),
+            ),
+            SizedBox(height: 12),
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -60,6 +82,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-
