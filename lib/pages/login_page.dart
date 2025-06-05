@@ -24,20 +24,30 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Travelife')),
+@override
+Widget build(BuildContext context) {
+  return Theme(
+    data: ThemeData.light(), // 👈 Força modo claro!
+    child: Scaffold(
+      // Retira o AppBar porque vamos botar o texto Travelife dentro do body
       body: Padding(
         padding: EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 👇 Logo fixa, SEM trocar
             Image.asset(
               'assets/logo_escuro.png',
               height: 120,
               width: 120,
+            ),
+            SizedBox(height: 12), // espaçamento entre a logo e o texto
+            Text(
+              'Travelife',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
             SizedBox(height: 32),
             TextFormField(
@@ -64,15 +74,17 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 24),
             ElevatedButton(
-              onPressed: _login,
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text('Entrar', style: TextStyle(fontSize: 18)),
-            ),
+  onPressed: _login,
+  style: ElevatedButton.styleFrom(
+    minimumSize: Size(double.infinity, 50),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+    backgroundColor: Colors.black, // fundo preto
+    foregroundColor: Colors.white, // texto branco
+  ),
+  child: Text('Entrar', style: TextStyle(fontSize: 18)),
+),
             SizedBox(height: 12),
             TextButton(
               onPressed: () {
@@ -86,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

@@ -52,8 +52,11 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return MaterialApp(
+    theme: ThemeData.light(),  // Força modo CLARO
+    debugShowCheckedModeBanner: false,  // Tira banner chato
+    home: Scaffold(
       appBar: AppBar(title: Text('Cadastrar')),
       body: Padding(
         padding: EdgeInsets.all(24),
@@ -111,8 +114,9 @@ class _SignupPageState extends State<SignupPage> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 extension on AuthResponse {
