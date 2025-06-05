@@ -33,6 +33,13 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // 👇 Logo fixa, SEM trocar
+            Image.asset(
+              'assets/logo_escuro.png',
+              height: 120,
+              width: 120,
+            ),
+            SizedBox(height: 32),
             TextFormField(
               controller: _usuarioController,
               decoration: InputDecoration(

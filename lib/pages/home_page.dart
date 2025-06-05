@@ -76,9 +76,7 @@ class _HomePageState extends State<HomePage> {
     final tripList = prefs.getStringList('trips') ?? [];
 
     setState(() {
-      trips = tripList
-          .map((t) => Trip.fromJson(jsonDecode(t)))
-          .toList();
+      trips = tripList.map((t) => Trip.fromJson(jsonDecode(t))).toList();
       _lastId = prefs.getInt('lastId') ?? 0;
     });
   }
@@ -92,25 +90,29 @@ class _HomePageState extends State<HomePage> {
       theme: theme,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Diário de Bordo'),
-          backgroundColor: theme.appBarTheme.backgroundColor,
-          foregroundColor: theme.appBarTheme.foregroundColor,
-          actions: [
-            IconButton(
-              icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-              onPressed: toggleTheme,
-            ),
-            IconButton(
-              icon: Icon(Icons.account_circle),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => ProfilePage()),
-                );
-              },
-            ),
-          ],
-        ),
+  title: Image.asset(
+    isDarkMode ? 'assets/logo_clara.png' : 'assets/logo_escura.png',
+    height: 40,
+  ),
+  backgroundColor: theme.appBarTheme.backgroundColor,
+  foregroundColor: theme.appBarTheme.foregroundColor,
+  actions: [
+    IconButton(
+      icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+      onPressed: toggleTheme,
+    ),
+    IconButton(
+      icon: Icon(Icons.account_circle),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ProfilePage()),
+        );
+      },
+    ),
+  ],
+),
+
         body: ListView.builder(
           itemCount: trips.length,
           itemBuilder: (context, index) {
@@ -145,7 +147,6 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Localização
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -159,7 +160,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      // Imagem
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.network(
@@ -185,7 +185,6 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      // Descrição
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -197,7 +196,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-                      // Curtir
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
