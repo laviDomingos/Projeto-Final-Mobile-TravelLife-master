@@ -10,9 +10,10 @@ desafiar com um app de Diário de Bordo de Viagens, contendo Tela de Login, Cada
 
 - [Sobre o Travelife](#sobre)
 - [Funcionalidades](#funcionalidades)
-- [Screenshots](#screenshots)
 - [Requisitos](#requisitos)
-- 
+- [Instalação](#instalação)
+- [Tecnologias](#tecnologias)
+- [Contribuições](#contribuições)
 
 # 🧳 Sobre 
 
@@ -24,15 +25,13 @@ suas experiências de viagens e memórias.
 # ⚙️ Funcionalidades
 
 - Lista de Funcionalidades principais:
-- Login com API
+- Login com Supabase
 - Navegação entre Telas
-- Integração com API ...
 - Variação de Temas
 - Armazenamento local
+- Favoritos
 
 ---
-
-# 📲 Screenshots
 
 # 📩 Requisitos
 
@@ -95,6 +94,11 @@ flutter run
 
 # 🛠️ Tecnologias
 
+- Flutter: Framework para criar aplicações multiplataforma, ou seja, permite que você desenvolva apps para Android, iOS, Web, Desktop (Windows, macOS e Linux)
+a partir de um único código-fonte.
+
+- Dart: Linguagem utilizada para desenvolvimento web, backend, desktop e até sistemas embarcados.
+
 <p align="left">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" width="40" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" width="40" />
@@ -108,5 +112,3 @@ flutter run
 - [Ariane Kedma Costa da Silva](https://github.com/ArianeKedma)
 - [Julia de França Macena Silva](https://github.com/Macenaaa)
 - [Lavínia Domingos](https://github.com/laviDomingos)
-
-
