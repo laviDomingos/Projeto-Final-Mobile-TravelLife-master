@@ -20,6 +20,9 @@ class _HomePageState extends State<HomePage> {
   Set<int> favoriteTrips = {};
   int _lastId = 0;
 
+  final Color offWhite = const Color(0xFFF5F5F5);
+  final Color black = Colors.black;
+
   @override
   void initState() {
     super.initState();
@@ -83,36 +86,84 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = isDarkMode ? ThemeData.dark() : ThemeData.light();
+    final theme =
+        isDarkMode
+            ? ThemeData.dark().copyWith(
+              scaffoldBackgroundColor: black,
+              appBarTheme: AppBarTheme(
+                backgroundColor: black,
+                foregroundColor: offWhite,
+                elevation: 0,
+              ),
+              textTheme: TextTheme(
+                bodyLarge: TextStyle(color: offWhite),
+                bodyMedium: TextStyle(color: offWhite),
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: offWhite,
+                  foregroundColor: black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            )
+            : ThemeData.light().copyWith(
+              scaffoldBackgroundColor: offWhite,
+              appBarTheme: AppBarTheme(
+                backgroundColor: offWhite,
+                foregroundColor: black,
+                elevation: 0,
+              ),
+              textTheme: TextTheme(
+                bodyLarge: TextStyle(color: black),
+                bodyMedium: TextStyle(color: black),
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: black,
+                  foregroundColor: offWhite,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: Scaffold(
         appBar: AppBar(
-  title: Image.asset(
-    isDarkMode ? 'assets/logo_clara.png' : 'assets/logo_escura.png',
-    height: 40,
-  ),
-  backgroundColor: theme.appBarTheme.backgroundColor,
-  foregroundColor: theme.appBarTheme.foregroundColor,
-  actions: [
-    IconButton(
-      icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-      onPressed: toggleTheme,
-    ),
-    IconButton(
-      icon: Icon(Icons.account_circle),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => ProfilePage()),
-        );
-      },
-    ),
-  ],
-),
-
+          title: Image.asset(
+            isDarkMode ? 'assets/logo_claro.png' : 'assets/logo_escuro.png',
+            height: 42,
+          ),
+          backgroundColor: theme.appBarTheme.backgroundColor,
+          foregroundColor: theme.appBarTheme.foregroundColor,
+          actions: [
+            IconButton(
+              icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+              onPressed: toggleTheme,
+            ),
+            IconButton(
+              icon: Icon(Icons.account_circle),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) => ProfilePage(
+                          isDarkMode: isDarkMode,
+                          toggleTheme: toggleTheme,
+                        ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
         body: ListView.builder(
           itemCount: trips.length,
           itemBuilder: (context, index) {
@@ -123,9 +174,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () async {
                 final result = await Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => EditTripPage(trip: trip),
-                  ),
+                  MaterialPageRoute(builder: (_) => EditTripPage(trip: trip)),
                 );
 
                 if (result != null && result is Map) {
@@ -137,8 +186,10 @@ class _HomePageState extends State<HomePage> {
                 }
               },
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 16,
+                ),
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -154,9 +205,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
-                            color: isDarkMode
-                                ? Colors.white70
-                                : Colors.black87,
+                            color: isDarkMode ? Colors.white70 : Colors.black87,
                           ),
                         ),
                       ),
@@ -192,7 +241,9 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             fontSize: 16,
                             color:
-                                isDarkMode ? Colors.white : Colors.black87,
+                                isDarkMode
+                                    ? const Color.fromRGBO(224, 224, 224, 1)
+                                    : Colors.black87,
                           ),
                         ),
                       ),
@@ -204,7 +255,10 @@ class _HomePageState extends State<HomePage> {
                               isFavorite
                                   ? Icons.favorite
                                   : Icons.favorite_border,
-                              color: isFavorite ? Colors.red : Colors.grey,
+                              color:
+                                  isFavorite
+                                      ? const Color.fromARGB(255, 0, 0, 0)
+                                      : Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
@@ -216,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                         ],
                       ),
                     ],
@@ -246,23 +300,22 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => FavoriteTripsPage(
-                    trips: trips,
-                    favoriteTrips: favoriteTrips,
-                  ),
+                  builder:
+                      (_) => FavoriteTripsPage(
+                        isDarkMode: isDarkMode,
+                        trips: trips,
+                        favoriteTrips: favoriteTrips,
+                      ),
                 ),
               );
             }
           },
+          backgroundColor: offWhite,
+          selectedItemColor: black,
+          unselectedItemColor: Colors.grey,
           items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_box),
-              label: 'Criar',
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.add_box), label: 'Criar'),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: 'Favoritos',
